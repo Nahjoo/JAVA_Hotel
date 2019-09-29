@@ -3,9 +3,28 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Hotel {
-
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Bedroom bedroom = new Bedroom();
+		SingleBedroom single = new SingleBedroom("Tourtel", 1,300,"Wifi");
+		SingleBedroom single2 = new SingleBedroom("Tourtel", 1,500,"Wifi");
+		FamilyBedromm family = new FamilyBedromm("Alain", 5, 205, "TV, Wifi");
+		SuiteBedroom suite = new SuiteBedroom("Palmier", 12, 401, "TV, Wifi, pscine");
+		Reservation reservation = new Reservation();
+		
+		single.CreateRoom(single);
+		single.CreateRoom(single2);
+		family.CreateRoom(family);
+		suite.CreateRoom(suite);
+		
+		start(single,single2,family,suite,reservation,bedroom);
+
+	}
+	
+	
+	public static void start(SingleBedroom single , SingleBedroom single2, FamilyBedromm family, SuiteBedroom suite, Reservation reservation,Bedroom bedroom ) {
+		
 		int choice;
 		int years = 0;
 		int month = 0;
@@ -13,6 +32,8 @@ public class Hotel {
 		int nbPeople;
 		int choiceRoom;
 		LocalDate date;
+		
+		
 		
 		System.out.println("----Rservation----");
 		System.out.println(" 1. Lister les chambres \n 2. Réserver une chambre \n 3. Afficher les réservation \n 4. Quitter l'application");
@@ -24,23 +45,12 @@ public class Hotel {
 		
 		if(choice != 1 && choice != 2 && choice != 3 && choice != 4) {
 			System.out.println("Veuillez saisir le bon mode !");
-			main(args);
+			start(single,single2,family,suite,reservation,bedroom);
 		}else {
-			Bedroom bedroom = new Bedroom();
-			SingleBedroom single = new SingleBedroom("Tourtel", 1,300,"Wifi");
-			SingleBedroom single2 = new SingleBedroom("Tourtel", 1,500,"Wifi");
-			FamilyBedromm family = new FamilyBedromm("Alain", 5, 205, "TV, Wifi");
-			SuiteBedroom suite = new SuiteBedroom("Palmier", 12, 401, "TV, Wifi, pscine");
-			Reservation reservation = new Reservation();
-			
-			single.CreateRoom(single);
-			single.CreateRoom(single2);
-			family.CreateRoom(family);
-			suite.CreateRoom(suite);
 			
 			if(choice == 1) {
 				single.getBedroom();
-				main(args);
+				start(single,single2,family,suite,reservation,bedroom);
 	
 			}else if(choice == 2) {
 				
@@ -66,7 +76,7 @@ public class Hotel {
 					choiceRoom = sc.nextInt();
 					bedroom.setDate(date);
 					SingleBedroom.getNbRoom(choiceRoom);
-					main(args);
+					start(single,single2,family,suite,reservation,bedroom);
 					
 					
 				}else if (nbPeople > 1 && nbPeople < 10) {
@@ -75,7 +85,7 @@ public class Hotel {
 					System.out.println("Selectionner le numero de la chambre :");
 					choiceRoom = sc.nextInt();
 					FamilyBedromm.getNbRoom(choiceRoom);
-					main(args);
+					start(single,single2,family,suite,reservation,bedroom);
 					
 					
 					
@@ -85,19 +95,16 @@ public class Hotel {
 					System.out.println("Selectionner le numero de la chambre :");
 					choiceRoom = sc.nextInt();
 					SuiteBedroom.getNbRoom(choiceRoom);
-					main(args);
+					start(single,single2,family,suite,reservation,bedroom);
 					
 				}
 			}else if(choice == 3) {
 				reservation.ReservationRoom();
-				main(args);
+				start(single,single2,family,suite,reservation,bedroom);
 			}else if(choice == 4) {
 				System.out.println("Bye Bye ...");
 				System.exit(0);
 			}
-		
-		}	
-
+		}
 	}
-	
 }
